@@ -8,6 +8,8 @@ Takes the Jetpack add-on manifest object, and returns the add-on ID.
 Usage
 -----
 
+.. code-block:: python
+
     from jetpackid.jetpackid import JetpackID
 
     file_path = '/path/to/package.json'
