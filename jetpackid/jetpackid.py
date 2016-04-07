@@ -16,21 +16,27 @@ class JetpackID(object):
     def __init__(self):
         pass
 
+    @staticmethod
+    def _get_id(manifest):
+        if 'id' in manifest and JetpackID.is_valid_id(manifest['id']):
+            return manifest['id']
+        if 'name' in manifest and JetpackID.is_valid_id('@' + manifest['name']):
+            return '@' + manifest['name']
+        return None
 
     @staticmethod
-    def get_id(manifest_path):
+    def get_id(path_or_dict):
         """
         Parse 'package.json' manifest file, and then return the Add-On/Extension ID.
         :param manifest: The input 'package.json' file path
         :return: the Add-On/Extension ID
         """
-        with open(manifest_path) as f:
-            manifest = json.load(f)
-            if 'id' in manifest and JetpackID.is_valid_id(manifest['id']):
-                return manifest['id']
-            if 'name' in manifest and JetpackID.is_valid_id('@' + manifest['name']):
-                return '@' + manifest['name']
-        return None
+        if isinstance(path_or_dict, dict):
+            return JetpackID._get_id(path_or_dict)
+        else:
+            with open(path_or_dict) as f:
+                manifest = json.load(f)
+                return JetpackID._get_id(manifest)
 
     @staticmethod
     def is_valid_id(id):

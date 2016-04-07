@@ -19,15 +19,24 @@ class MyTestCase(unittest.TestCase):
         self.assertFalse(JetpackID.is_valid_id("#askeing.xpi"))
         self.assertFalse(JetpackID.is_valid_id("-"))
 
-    def test_get_id(self):
+    def test_get_id_from_file(self):
         current_dir = os.path.dirname(os.path.realpath(__file__))
 
-        file_path = os.path.join(current_dir, 'package.json')
-        self.assertEqual(JetpackID.get_id(file_path), '@testname')
+        file_path = os.path.join(current_dir, "package.json")
+        self.assertEqual(JetpackID.get_id(file_path), "@testname")
 
-        file_path = os.path.join(current_dir, 'package_fail.json')
+        file_path = os.path.join(current_dir, "package_fail.json")
         self.assertEqual(JetpackID.get_id(file_path), None)
 
+    def test_get_id_from_dict(self):
+        manifest = dict(id="{12345678-1234-1234-1234-123412341234}")
+        self.assertEqual(JetpackID.get_id(manifest), "{12345678-1234-1234-1234-123412341234}")
+
+        manifest = dict(name="JETPACK_ID")
+        self.assertEqual(JetpackID.get_id(manifest), "@JETPACK_ID")
+
+        manifest = dict(name="#")
+        self.assertEqual(JetpackID.get_id(manifest), None)
 
 if __name__ == '__main__':
     unittest.main()
