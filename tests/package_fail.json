@@ -1,0 +1,16 @@
+{
+  "title": "testxpi",
+  "name": "#",
+  "version": "0.0.1",
+  "description": "for testing",
+  "main": "index.js",
+  "author": "Askeing",
+  "engines": {
+    "firefox": ">=38.0 <=49.0",
+    "fennec": ">=38.0 <=49.0"
+  },
+  "license": "MPL-2.0",
+  "keywords": [
+    "test"
+  ]
+}

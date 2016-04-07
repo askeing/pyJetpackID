@@ -1,0 +1,16 @@
+{
+  "title": "test title",
+  "name": "testname",
+  "version": "0.0.1",
+  "description": "test description",
+  "main": "index.js",
+  "author": "Askeing",
+  "engines": {
+    "firefox": ">=38.0 <=49.0",
+    "fennec": ">=38.0 <=49.0"
+  },
+  "license": "MPL-2.0",
+  "keywords": [
+    "test"
+  ]
+}
